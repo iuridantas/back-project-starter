@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  database:
+    image: bitnami/postgresql
+
+    # Mapeia a porta do contêiner para a porta do host.
+    ports:
+      - '5432:5432'
+
+    # Define o nome do contêiner.
+    container_name: my-database
+
+    # Reinicia o contêiner automaticamente se ele falhar ou for reiniciado.
+    restart: always
+
+    # Cria um volume para persistir os dados do banco de dados.
+    volumes:
+      - my-database-data:/var/lib/postgresql/data
+
+    # Define as variáveis de ambiente para configurar o PostgreSQL.
+    environment:
+      # Define o nome de usuário do PostgreSQL.
+      POSTGRES_USER: myuser
+
+      # Define a senha do PostgreSQL.
+      POSTGRES_PASSWORD: mypassword
+
+      # Define o nome do banco de dados a ser criado.
+      POSTGRES_DB: mydatabase
+
+volumes:
+  # Volume para persistir os dados do banco de dados.
+  my-database-data:
